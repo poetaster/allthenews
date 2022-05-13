@@ -12,6 +12,10 @@ Page {
         PageHeader {
             title: "About"
         }
+        Image {
+            source: Qt.resolvedUrl("/usr/share/icons/hicolor/172x172/apps/harbour-allthenews.png")
+             anchors.horizontalCenter: parent.horizontalCenter
+        }
         Label {
             anchors {
                 left: parent.left
@@ -35,7 +39,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             linkColor: Theme.highlightColor
-            text: qsTr("(c) poetaster, ") + "GPLv3, <a href='https://github.com/poetaster/allthenews'> github</a>"
+            text: qsTr("(c) poetaster 2022, ") + "GPLv3, <a href='https://github.com/poetaster/allthenews'> github</a>"
             onLinkActivated: {
                 Qt.openUrlExternally(link);
             }
@@ -55,16 +59,6 @@ Page {
             }
         }
 
-        Image {
-
-            source: Qt.resolvedUrl("/usr/share/icons/hicolor/86x86/harbour-allthenews.png")
-            //                       "image://theme/graphic-cover-email-background
-            Component.onCompleted: {
-                console.log(source.toString())
-            }
-             anchors.horizontalCenter: parent.horizontalCenter
-
-        }
     }
 }
 

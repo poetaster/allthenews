@@ -19,6 +19,7 @@ DISTFILES += \
     qml/cover/CoverPage.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
+    qml/pages/*.svg \
     harbour-allthenews.png \
     harbour-allthenews.svg \
     rpm/allthenews.changes.in \

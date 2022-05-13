@@ -41,7 +41,6 @@ Icon: https://raw.githubusercontent.com/poetaster/harbour-allthenews/master/icon
 Screenshots:
  - https://raw.githubusercontent.com/poetaster/harbour-allthenews/master/Screenshot_1.png
  - https://raw.githubusercontent.com/poetaster/harbour-allthenews/master/Screenshot_2.png
- - https://raw.githubusercontent.com/poetaster/harbour-allthenews/master/Screenshot_3.png
 Url:
   Donation: https://www.paypal.me/poetasterFOSS
 %endif

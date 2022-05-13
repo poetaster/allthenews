@@ -52,6 +52,14 @@ ApplicationWindow
                 icon.width: 256
                 icon.fillMode: Image.PreserveAspectFit
             }
+            Image
+            {
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 3 * Theme.paddingLarge
+                id: im
+                source: "/usr/share/icons/hicolor/172x172/apps/harbour-allthenews.png"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
         }
     }
 }

@@ -4,22 +4,22 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../qml/pages/About.qml" line="23"/>
+        <location filename="../qml/pages/About.qml" line="24"/>
         <source>Feed by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="23"/>
+        <location filename="../qml/pages/About.qml" line="24"/>
         <source>News API can provide headlines from 70 worldwide source.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="36"/>
-        <source>(c) poetaster, </source>
+        <location filename="../qml/pages/About.qml" line="38"/>
+        <source>(c) poetaster 2022, </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="49"/>
+        <location filename="../qml/pages/About.qml" line="52"/>
         <source>Icon from</source>
         <translation type="unfinished"></translation>
     </message>

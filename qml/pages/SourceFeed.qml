@@ -9,6 +9,7 @@ Page {
     property string source
     property string sourceTitle
     property string search
+    property string url
 
     ListModel {
         id: feed
@@ -36,6 +37,7 @@ Page {
     }
 
     Component {
+
         id: feedDelegate
         ListItem {
             //contentHeight: Theme.itemSizeMedium + sourceLogo.height + descriptionText.height
@@ -107,13 +109,13 @@ Page {
         if (search) {
             busyIndicator.running = true
             busyIndicator.visible = true
-            var url = "https://newsapi.org/v2/everything?q=" + search + "&sortBy=publishedAt"
+            url = "https://newsapi.org/v2/everything?q=" + search + "&sortBy=publishedAt"
             Utils.sendHttpRequest("GET", url, fillData)
 
         } else if (source && sourceTitle) {
             busyIndicator.running = true
             busyIndicator.visible = true
-            var url = "https://newsapi.org/v2/top-headlines?sources=" + source
+             url = "https://newsapi.org/v2/top-headlines?sources=" + source
             Utils.sendHttpRequest("GET", url, fillData)
         }
     }
@@ -135,7 +137,7 @@ Page {
                 onClicked: {
                     if (source) {
                         feed.clear()
-                        var url = "https://newsapi.org/v2/top-headlines?sources=" + source //+ "&apiKey=" + Utils.apiKey
+                        url = "https://newsapi.org/v2/top-headlines?sources=" + source //+ "&apiKey=" + Utils.apiKey
                         Utils.sendHttpRequest("GET", url, fillData)
                     }
                 }
