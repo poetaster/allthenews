@@ -14,7 +14,7 @@ function sendHttpRequest(requestType, url, callback, params) {
     if(requestType === "GET") {
         doc.setRequestHeader('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0')
         doc.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-        doc.setRequestHeader('X-Api-Key', apiKey)
+        //doc.setRequestHeader('X-Api-Key', apiKey)
     } else {
         doc.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
         //doc.setRequestHeader('X-Api-Key', apiKey)

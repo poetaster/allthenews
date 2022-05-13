@@ -43,22 +43,22 @@
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="159"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="162"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="165"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="168"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="174"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="177"/>
         <source>Search news</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="187"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
         <source>Nothing to show now</source>
         <translation type="unfinished"></translation>
     </message>

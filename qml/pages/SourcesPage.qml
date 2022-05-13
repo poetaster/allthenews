@@ -44,6 +44,8 @@ Page {
     }
 
     function getSources(/*lang, country, category*/) {
+
+        database.initDatabase()
         sources.clear()
         var options
         var lang = database.getName("language")
@@ -77,10 +79,11 @@ Page {
         }
 
         var url
+        var apiKey = database.getValue("apiKey")
         if (options) {
-            url = "https://newsapi.org/v2/sources?" + options
+            url = "https://newsapi.org/v2/sources?apikey=" + apiKey + "&" + options
         } else {
-            url = "https://newsapi.org/v2/sources"
+            url = "https://newsapi.org/v2/sources?apikey=" + apiKey
         }
         Utils.sendHttpRequest("GET", url, fillData)
     }
