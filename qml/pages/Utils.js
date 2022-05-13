@@ -1,5 +1,3 @@
-var apiKey = "c83a200a9b8b4ddab916d932d1a31f8b"
-
 function sendHttpRequest(requestType, url, callback, params) {
     var doc = new XMLHttpRequest()
     doc.onreadystatechange = function() {
@@ -19,9 +17,9 @@ function sendHttpRequest(requestType, url, callback, params) {
         doc.setRequestHeader('X-Api-Key', apiKey)
     } else {
         doc.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-        doc.setRequestHeader('X-Api-Key', apiKey)
+        //doc.setRequestHeader('X-Api-Key', apiKey)
     }
-    console.log("send url", url+"&apiKey="+apiKey)
+    console.log("send url", url)
     doc.send(params)
 }
 

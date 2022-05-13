@@ -11,6 +11,11 @@ Page {
     property string search
     property string url
 
+    Database {
+        id: database
+    }
+
+
     ListModel {
         id: feed
     }
@@ -106,16 +111,21 @@ Page {
     }
 
     Component.onCompleted: {
+        database.initDatabase()
+
         if (search) {
             busyIndicator.running = true
             busyIndicator.visible = true
-            url = "https://newsapi.org/v2/everything?q=" + search + "&sortBy=publishedAt"
+            var apiKey = database.getValue("apiKey")
+            url = "https://newsapi.org/v2/everything?apiKey=" + apiKey + "&q=" + search + "&sortBy=publishedAt"
             Utils.sendHttpRequest("GET", url, fillData)
 
         } else if (source && sourceTitle) {
             busyIndicator.running = true
             busyIndicator.visible = true
-             url = "https://newsapi.org/v2/top-headlines?sources=" + source
+            var apiKey = database.getValue("apiKey")
+            console.debug(database.getValue("apiKey"))
+            url = "https://newsapi.org/v2/top-headlines?apiKey=" + apiKey + "&sources=" + source
             Utils.sendHttpRequest("GET", url, fillData)
         }
     }
@@ -137,7 +147,7 @@ Page {
                 onClicked: {
                     if (source) {
                         feed.clear()
-                        url = "https://newsapi.org/v2/top-headlines?sources=" + source //+ "&apiKey=" + Utils.apiKey
+                        url = "https://newsapi.org/v2/top-headlines?apiKey=" + apiKey + "&sources=" + source //+ "&apiKey=" + Utils.apiKey
                         Utils.sendHttpRequest("GET", url, fillData)
                     }
                 }

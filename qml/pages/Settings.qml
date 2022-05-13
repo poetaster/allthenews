@@ -3,13 +3,13 @@ import Sailfish.Silica 1.0
 
 Dialog {
     property var settings: ({})
-
     Database {
         id: database
     }
 
     Component.onCompleted: {
         database.initDatabase()
+
         var langIndex = database.getValue("language")
         if (langIndex) {
             lang.currentIndex = langIndex
@@ -28,12 +28,32 @@ Dialog {
         } else {
             database.storeData("category", 0, "All")
         }
+        var apiKeyText = database.getValue("apiKey")
+        if (apiKeyText !== "") {
+            apiKey.text =  apiKeyText
+        } else {
+            database.storeData("apiKey", 0, "0")
+        }
     }
 
     Column {
         width: parent.width
 
         DialogHeader { }
+
+        SectionHeader {
+            text: "apiKey"
+            horizontalAlignment: Text.AlignLeft
+        }
+
+        TextField {
+            id: apiKey
+            label: qsTr("newsapi.org API key")
+            width: parent.width
+            onTextChanged: {
+                database.storeData("apiKey", apiKey.text, apiKey.text)
+            }
+        }
 //ar en cn de es fr he it nl no pt ru sv ud
         SectionHeader {
             text: "Language"
@@ -140,10 +160,14 @@ Dialog {
     }
 
     onDone: {
-        if (result == DialogResult.Accepted) {
-            settings = {"language": lang.value, "country": country.value, "category": category.value}
-            console.log("language", lang.value, "country", country.value, "category", category.value)
+        if (result === DialogResult.Accepted) {
 
+            settings = {"language": lang.value, "country": country.value, "category": category.value, "apiKey": apiKey.text}
+            console.log("language", lang.value, "country", country.value, "category", category.value, "apiKey", apiKey.text)
+
+            console.log(apiKey.text)
+
+            database.storeData("apiKey", apiKey.text, apiKey.text)
             database.storeData("language", lang.currentIndex, lang.value)
             database.storeData("country", country.currentIndex, country.value)
             database.storeData("category", category.currentIndex, category.value)
