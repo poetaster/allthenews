@@ -76,14 +76,6 @@ desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/*.desktop
 
-for size in 86 108 128 172
-do
-   mkdir -p %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/
-   rsvg-convert --width=$size --height=$size --output \
-           %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/%{name}.png \
-           harbour-allthenews.svg
-done
-
 %files
 %defattr(-,root,root,-)
 %defattr(0644,root,root,-)

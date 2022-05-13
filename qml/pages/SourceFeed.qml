@@ -25,9 +25,9 @@ Page {
         if (data !== "error") {
             var parsed = JSON.parse(data)
             if (parsed.status === "ok") {
-               for (var i in parsed.articles) {
-                   feed.append(parsed.articles[i])
-               }
+                for (var i in parsed.articles) {
+                    feed.append(parsed.articles[i])
+                }
             }
 
             busyIndicator.running = false
@@ -38,25 +38,22 @@ Page {
     Component {
         id: feedDelegate
         ListItem {
-            contentHeight: Theme.itemSizeMedium + sourceLogo.height + descriptionText.height
-            height: Theme.itemSizeMedium + contentRow.height
+            //contentHeight: Theme.itemSizeMedium + sourceLogo.height + descriptionText.height
+            height: Theme.itemSizeMedium + contentRow.height + feedTitle.height
             width: parent.width
-            SectionHeader {
+
+            Label {
                 id: feedTitle
-                text: title
-                width:parent.width
-                height: contentRow.height / 2
                 anchors {
-                    left: parent.left
-                    right: parent.right
-                    topMargin: Theme.paddingLarge
-                    leftMargin: Theme.paddingMedium
-                    rightMargin: Theme.paddingMedium
+                    left: contentRow.left
+                    leftMargin : Theme.paddingMedium
                 }
+                text: title
+                width:parent.width - (2 * Theme.paddingLarge)
                 horizontalAlignment: Text.AlignLeft
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
-                truncationMode: TruncationMode.Fade
+                truncationMode: TruncationMode.Elide
                 maximumLineCount: 2
                 wrapMode: Text.WordWrap
 
@@ -70,39 +67,36 @@ Page {
                     bottomMargin: Theme.paddingLarge
                     topMargin: Theme.paddingLarge
                 }
-            Text {
-                id: descriptionText
-                anchors {
-                    left: parent.left
-                    leftMargin: Theme.paddingMedium
-                    //baseline: unreadCount.baseline
-                    //baselineOffset: lineCount > 1 ? -implicitHeight/2 : -(height-implicitHeight)/2
+                Text {
+                    id: descriptionText
+                    anchors {
+                        left: parent.left
+                        leftMargin: Theme.paddingMedium
+                        //baseline: unreadCount.baseline
+                        //baselineOffset: lineCount > 1 ? -implicitHeight/2 : -(height-implicitHeight)/2
 
+                    }
+                    horizontalAlignment: Text.AlignLeft
+                    width: (parent.width / 2) - Theme.paddingMedium
+                    text: description
+                    wrapMode: "WordWrap"
+                    color: Theme.primaryColor
+                    font.family: Theme.fontFamily
+                    font.pointSize: Theme.fontSizeTiny
                 }
-                horizontalAlignment: Text.AlignLeft
-                width: (parent.width / 2) - Theme.paddingMedium
-                text: description
-                wrapMode: "WordWrap"
-                color: Theme.primaryColor
-                font.family: Theme.fontFamily
-                font.pointSize: Theme.fontSizeTiny
-            }
-            Image {
-                id: sourceLogo
-                anchors {
-                    right: parent.right
-                    left: descriptionText.right
-                    leftMargin: Theme.paddingMedium
+                Image {
+                    id: sourceLogo
+                    anchors {
+                        right: parent.right
+                        left: descriptionText.right
+                        leftMargin: Theme.paddingMedium
+                    }
+                    horizontalAlignment: Text.AlignRight
+                    source: decodeURI(urlToImage)
+                    width: parent.width / 3 //- Theme.paddingMedium
+                    fillMode: Image.PreserveAspectFit
                 }
-                horizontalAlignment: Text.AlignRight
-                source: decodeURI(urlToImage)
-                width: parent.width / 3 //- Theme.paddingMedium
-                fillMode: Image.PreserveAspectFit
             }
-            }
-            Separator {
-            }
-
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("NewsWebPage.qml"), {url: url})
             }

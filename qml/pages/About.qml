@@ -20,6 +20,7 @@ Page {
             color: Theme.primaryColor
             horizontalAlignment: Text.AlignJustify
             wrapMode: Text.WordWrap
+            linkColor: Theme.highlightColor
             text: qsTr("Feed by") + "<a href='https://newsapi.org'> newsapi.org</a>.<br>" + qsTr("News API can provide headlines from 70 worldwide source.")
             onLinkActivated: {
                 Qt.openUrlExternally(link);
@@ -33,6 +34,7 @@ Page {
             color: Theme.primaryColor
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
+            linkColor: Theme.highlightColor
             text: qsTr("(c) poetaster, ") + "GPLv3, <a href='https://github.com/poetaster/allthenews'> github</a>"
             onLinkActivated: {
                 Qt.openUrlExternally(link);
@@ -46,6 +48,7 @@ Page {
             color: Theme.primaryColor
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
+            linkColor: Theme.highlightColor
             text: qsTr("Icon from") + "<a href='https://icon-icons.com'>icon-icons.com</a>, <a href='https://creativecommons.org/licenses/by/4.0/'>CC</a>"
             onLinkActivated: {
                 Qt.openUrlExternally(link);
