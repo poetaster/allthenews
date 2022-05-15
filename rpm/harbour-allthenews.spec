@@ -9,7 +9,7 @@ Name:       harbour-allthenews
 # << macros
 
 Summary:    All the news. News from newapi.org.
-Version:    0.2
+Version:    0.3
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
@@ -71,6 +71,7 @@ rm -rf %{buildroot}
 
 # >> install post
 # << install post
+
 
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \

@@ -4,12 +4,12 @@ import QtQuick.LocalStorage 2.0 as Sql
 Item {
     // reference to the database object
     property var _db;
-
+    property bool debug: false
     property variant record
 
     function initDatabase() {
         // initialize the database object
-        console.log('initDatabase()')
+        if (debug) console.log('initDatabase()')
         _db = Sql.LocalStorage.openDatabaseSync("NewsAPI", "1.0", "News API settings SQL database", 1000000);
         _db.transaction( function(tx) {
             // Create the database if it doesn't already exist
@@ -20,7 +20,7 @@ Item {
 
     function storeData(keyname, value, textName) {
         // stores data to _db
-        console.log('storeData()', keyname, value, textName)
+        if (debug) console.log('storeData()', keyname, value, textName)
         if(!_db) { return; }
         _db.transaction( function(tx) {
             var result = tx.executeSql('INSERT OR REPLACE INTO settings VALUES (?,?,?);', [keyname,value,textName]);
@@ -31,7 +31,7 @@ Item {
     }
 
     function getValue(keyname) {
-        console.log('getValue()', keyname)
+        if (debug) console.log('getValue()', keyname)
         var res
         if(!_db) { return; }
         _db.transaction( function(tx) {
@@ -44,7 +44,7 @@ Item {
     }
 
     function getName(keyname) {
-        console.log('getName()', keyname)
+        if (debug) console.log('getName()', keyname)
         var res
         if(!_db) { return; }
         _db.transaction( function(tx) {
@@ -56,6 +56,5 @@ Item {
         })
         return res
     }
-
 }
 

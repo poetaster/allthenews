@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 
 Dialog {
     property string searchString
-
+    property bool debug: false
 
     QtObject {
         id: internal
@@ -30,10 +30,12 @@ Dialog {
             internal.history = '{"data": [{"searchText": ""}]}'
             database.storeData("searchHistory", 0, internal.history)
         }
-        console.log(internal.history)
-        console.log(JSON.stringify(internal.historyData))
+        if (debug) console.log(internal.history)
+        if (debug) console.log(JSON.stringify(internal.historyData))
+
         internal.historyData = JSON.parse(internal.history)
-        console.log(JSON.stringify(internal.historyData))
+
+        if (debug) console.log(JSON.stringify(internal.historyData))
 
         for (var i in internal.historyData.data) {
             historyModel.append(internal.historyData.data[i])
@@ -49,8 +51,8 @@ Dialog {
             id: searchField
 
             width: parent.width
-            placeholderText: "Search news"
-            label: "Search text"
+            placeholderText: qsTr("Search the news")
+            label: qsTr("Search text")
         }
 
         Separator { }
@@ -92,7 +94,7 @@ Dialog {
                 }
             })
             var store = JSON.stringify(internal.historyData)
-            console.log(store)
+            if (debug) console.log(store)
 
             database.storeData("searchHistory", internal.historyData.data.length, store)
         }

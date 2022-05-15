@@ -10,6 +10,7 @@ Page {
     property string sourceTitle
     property string search
     property string url
+    property bool debug: false
 
     Database {
         id: database
@@ -33,6 +34,7 @@ Page {
             if (parsed.status === "ok") {
                 for (var i in parsed.articles) {
                     feed.append(parsed.articles[i])
+                    if (debug) console.debug(parsed.articles[i].author)
                 }
             }
 
@@ -46,7 +48,7 @@ Page {
         id: feedDelegate
         ListItem {
             //contentHeight: Theme.itemSizeMedium + sourceLogo.height + descriptionText.height
-            height: Theme.itemSizeMedium + contentRow.height + feedTitle.height
+            height: Theme.itemSizeMedium + contentRow.height + feedTitle.height + metaRow.height
             width: parent.width
 
             Label {
@@ -66,19 +68,54 @@ Page {
 
             }
             Item {
+                id: metaRow
+                height: childrenRect.height
+                width:parent.width - (2 * Theme.paddingLarge)
+                anchors {
+                    top: feedTitle.bottom
+                    left: feedTitle.left
+                    bottomMargin: Theme.paddingLarge
+                    topMargin: Theme.paddingLarge
+                }
+                Label {
+                    id: publishedAtField
+                    width:parent.width / 2 - Theme.paddingLarge
+                    anchors {
+                        leftMargin : Theme.paddingMedium
+                    }
+                    text: publishedAt
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                }
+            }
+            Item {
                 id: contentRow
                 height: childrenRect.height
                 width:parent.width
                 anchors {
-                    top: feedTitle.bottom
-                    bottomMargin: Theme.paddingLarge
-                    topMargin: Theme.paddingLarge
+                    top: metaRow.bottom
+                    bottomMargin: Theme.paddingSmall
+                    topMargin: Theme.paddingSmall
+                }
+                Label {
+                    id: authorField
+                    width: (parent.width / 2) - Theme.paddingMedium
+                    anchors {
+                        top: parent.top
+                        left:parent.left
+                        leftMargin: Theme.paddingMedium
+                        bottomMargin : Theme.paddingLarge
+                    }
+                    text: qsTr("By - ") + author
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    wrapMode: "WordWrap"
                 }
                 Text {
                     id: descriptionText
                     anchors {
+                        top:authorField.bottom
                         left: parent.left
                         leftMargin: Theme.paddingMedium
+                        topMargin : Theme.paddingLarge
                         //baseline: unreadCount.baseline
                         //baselineOffset: lineCount > 1 ? -implicitHeight/2 : -(height-implicitHeight)/2
 
@@ -89,7 +126,7 @@ Page {
                     wrapMode: "WordWrap"
                     color: Theme.primaryColor
                     font.family: Theme.fontFamily
-                    font.pointSize: Theme.fontSizeTiny
+                    font.pixelSize: Theme.fontSizeSmall
                 }
                 Image {
                     id: sourceLogo
@@ -124,7 +161,7 @@ Page {
             busyIndicator.running = true
             busyIndicator.visible = true
             var apiKey = database.getValue("apiKey")
-            console.debug(database.getValue("apiKey"))
+            if (debug) console.debug(database.getValue("apiKey"))
             url = "https://newsapi.org/v2/top-headlines?apiKey=" + apiKey + "&sources=" + source
             Utils.sendHttpRequest("GET", url, fillData)
         }
@@ -143,10 +180,11 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
                 onClicked: {
                     if (source) {
                         feed.clear()
+                        var apiKey = database.getValue("apiKey")
                         url = "https://newsapi.org/v2/top-headlines?apiKey=" + apiKey + "&sources=" + source //+ "&apiKey=" + Utils.apiKey
                         Utils.sendHttpRequest("GET", url, fillData)
                     }
@@ -156,7 +194,7 @@ Page {
 
         ViewPlaceholder {
             enabled: feed.count == 0 && !busyIndicator.running
-            text: "Nothing to show now"
+            text: qsTr("Nothing to show now")
         }
     }
 }

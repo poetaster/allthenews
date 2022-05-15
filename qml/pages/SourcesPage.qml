@@ -4,6 +4,8 @@ import Sailfish.Silica 1.0
 import "Utils.js" as Utils
 
 Page {
+    property bool debug: false
+
     id: sourcesPage
 
     Database {
@@ -89,7 +91,7 @@ Page {
     }
 
     function searchPage(value) {
-        console.log(value)
+        if (debug) console.log(value)
         app.feedTitle = value
 //        pageStack.pop()
         pageStack.replace(Qt.resolvedUrl("SourceFeed.qml"), {search: value})
@@ -98,7 +100,7 @@ Page {
     Component {
         id: sourcesListDelegate
         ListItem {
-            contentHeight: Theme.itemSizeSmall + feedName.height + descriptionText.height
+            contentHeight: feedName.height + descriptionText.height
             height: childrenRect.height
             //Theme.itemSizeSmall + feedName.height + descriptionText.height
             width: parent.width
@@ -130,9 +132,6 @@ Page {
                 font.pointSize: Theme.fontSizeTiny
                 horizontalAlignment: Text.AlignLeft
             }
-            Separator {
-            }
-
             onClicked: {
                 app.feedTitle = name
                 pageStack.push(Qt.resolvedUrl("SourceFeed.qml"), {source: id, sourceTitle: name})

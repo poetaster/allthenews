@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Dialog {
     property var settings: ({})
+    property bool debug: false
     Database {
         id: database
     }
@@ -56,7 +57,7 @@ Dialog {
         }
 //ar en cn de es fr he it nl no pt ru sv ud
         SectionHeader {
-            text: "Language"
+            text: qsTr("Language")
             horizontalAlignment: Text.AlignLeft
         }
         ComboBox {
@@ -67,7 +68,7 @@ Dialog {
                 leftMargin: Theme.paddingMedium
             }
 
-            label: "Select language"
+            label: qsTr("Select language")
 
             menu: ContextMenu {
                 MenuItem { text: "All" }
@@ -88,7 +89,7 @@ Dialog {
             }
         }
         SectionHeader {
-            text: "Country"
+            text: qsTr("Country")
             horizontalAlignment: Text.AlignLeft
         }
         ComboBox {
@@ -99,7 +100,7 @@ Dialog {
                 leftMargin: Theme.paddingMedium
             }
 
-            label: "Select country"
+            label: qsTr("Select country")
             //ar au br ca cn de es fr gb hk ie in is it nl no pk ru sa sv us za
             menu: ContextMenu {
                 MenuItem { text: "All" }
@@ -126,11 +127,11 @@ Dialog {
                 MenuItem { text: "za" }
             }
             onCurrentIndexChanged: {
-                console.log("Index", currentIndex)
+                if (debug) console.log("Index", currentIndex)
             }
         }
         SectionHeader {
-            text: "Category"
+            text: qsTr("Category")
             horizontalAlignment: Text.AlignLeft
         }
         //business, entertainment, gaming, general, music, science-and-nature, sport, technology
@@ -142,7 +143,7 @@ Dialog {
                 leftMargin: Theme.paddingMedium
             }
 
-            label: "Select category"
+            label: qsTr("Select category")
 
             menu: ContextMenu {
                 MenuItem { text: "All" }
@@ -163,9 +164,9 @@ Dialog {
         if (result === DialogResult.Accepted) {
 
             settings = {"language": lang.value, "country": country.value, "category": category.value, "apiKey": apiKey.text}
-            console.log("language", lang.value, "country", country.value, "category", category.value, "apiKey", apiKey.text)
+            if (debug) console.log("language", lang.value, "country", country.value, "category", category.value, "apiKey", apiKey.text)
 
-            console.log(apiKey.text)
+            if (debug) console.log(apiKey.text)
 
             database.storeData("apiKey", apiKey.text, apiKey.text)
             database.storeData("language", lang.currentIndex, lang.value)
