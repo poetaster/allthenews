@@ -9,13 +9,14 @@ Name:       harbour-allthenews
 # << macros
 
 Summary:    All the news. News from newapi.org.
-Version:    0.3
+Version:    0.4
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
 BuildArch:  noarch
 URL:        https://github.com/poetaster/allthenews
 Source0:    %{name}-%{version}.tar.bz2
+Source31:   harbour-allthenews.svg
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
@@ -24,6 +25,7 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt5-qttools-linguist
+BuildRequires: librsvg-tools
 
 %description
 All the news. News from newapi.org. Requires an api key to use.
@@ -59,11 +61,24 @@ Url:
 
 make %{?_smp_mflags}
 
+
 # >> build post
 # << build post
 
 %install
 rm -rf %{buildroot}
+
+%make_install
+install -D -m0644 %{SOURCE31}  %{_tmppath}/
+
+for size in 86 108 128 172
+do
+   mkdir -p %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/
+   rsvg-convert --width=$size --height=$size --output \
+           %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/%{name}.png \
+          %{_tmppath}/harbour-allthenews.svg
+done
+
 # >> install pre
 # << install pre
 %qmake5_install

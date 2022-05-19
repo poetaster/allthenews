@@ -34,6 +34,7 @@ Page {
             if (parsed.status === "ok") {
                 for (var i in parsed.articles) {
                     feed.append(parsed.articles[i])
+
                     if (debug) console.debug(parsed.articles[i].author)
                 }
             }
@@ -161,7 +162,9 @@ Page {
             busyIndicator.running = true
             busyIndicator.visible = true
             var apiKey = database.getValue("apiKey")
+
             if (debug) console.debug(database.getValue("apiKey"))
+
             url = "https://newsapi.org/v2/top-headlines?apiKey=" + apiKey + "&sources=" + source
             Utils.sendHttpRequest("GET", url, fillData)
         }

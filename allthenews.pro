@@ -19,8 +19,7 @@ DISTFILES += \
     qml/cover/CoverPage.qml \
     qml/pages/*.qml \
     qml/pages/*.js \
-    qml/pages/*.svg \
-    harbour-allthenews.png \
+    qml/harbour-allthenews.svg \
     harbour-allthenews.svg \
     rpm/allthenews.changes.in \
     rpm/harbour-allthenews.svg \
@@ -29,9 +28,8 @@ DISTFILES += \
     rpm/harbour-allthenews.yaml \
     rpm/allthenews.spec \
     translations/*.ts \
-    icons/*/*
 
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
+#SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 # to disable building translations every time, comment out the
 # following CONFIG line

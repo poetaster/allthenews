@@ -30,6 +30,7 @@ Dialog {
             internal.history = '{"data": [{"searchText": ""}]}'
             database.storeData("searchHistory", 0, internal.history)
         }
+
         if (debug) console.log(internal.history)
         if (debug) console.log(JSON.stringify(internal.historyData))
 

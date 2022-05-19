@@ -53,7 +53,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.WordWrap
             linkColor: Theme.highlightColor
-            text: qsTr("Icon from") + "<a href='https://icon-icons.com'>icon-icons.com</a>, <a href='https://creativecommons.org/licenses/by/4.0/'>CC</a>"
+            text: qsTr("Icon from") + "<a href='https://icon-icons.com'>icon-icons.com</a>, \n <a href='https://creativecommons.org/licenses/by/4.0/'>CC-By-4</a>"
             onLinkActivated: {
                 Qt.openUrlExternally(link);
             }

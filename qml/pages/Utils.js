@@ -3,7 +3,7 @@ function sendHttpRequest(requestType, url, callback, params) {
     doc.onreadystatechange = function() {
         if (doc.readyState === 4) {
             if (doc.status === 200) {
-//                console.log("Get response:", doc.responseText)
+               // console.log("Get response:", doc.responseText)
                 callback(doc.responseText)
             } else {
                 callback("error", doc.responseText)

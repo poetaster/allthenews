@@ -35,12 +35,12 @@
 <context>
     <name>SearchPage</name>
     <message>
-        <location filename="../qml/pages/SearchPage.qml" line="54"/>
+        <location filename="../qml/pages/SearchPage.qml" line="55"/>
         <source>Search the news</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SearchPage.qml" line="55"/>
+        <location filename="../qml/pages/SearchPage.qml" line="56"/>
         <source>Search text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -86,17 +86,17 @@
 <context>
     <name>SourceFeed</name>
     <message>
-        <location filename="../qml/pages/SourceFeed.qml" line="108"/>
+        <location filename="../qml/pages/SourceFeed.qml" line="109"/>
         <source>By - </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceFeed.qml" line="183"/>
+        <location filename="../qml/pages/SourceFeed.qml" line="186"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceFeed.qml" line="197"/>
+        <location filename="../qml/pages/SourceFeed.qml" line="200"/>
         <source>Nothing to show now</source>
         <translation type="unfinished"></translation>
     </message>
@@ -104,23 +104,33 @@
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="161"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="175"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="167"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="181"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="176"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
         <source>Search news</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="189"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="203"/>
         <source>Nothing to show now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="214"/>
+        <source>apiKey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="215"/>
+        <source>- Select settings to enter an apiKey for newsapi.org</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

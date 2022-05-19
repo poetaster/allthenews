@@ -5,6 +5,8 @@ import "Utils.js" as Utils
 
 Page {
     property bool debug: false
+    property string apiKey
+    property bool showHint
 
     id: sourcesPage
 
@@ -29,6 +31,16 @@ Page {
         busyIndicator.running = true
         busyIndicator.visible = true
         database.initDatabase()
+        apiKey = database.getValue("apiKey")
+
+        if (debug) console.debug(apiKey )
+
+        if (apiKey) {
+            showHint = false
+        } else {
+            showHint = true
+        }
+
         getSources()
     }
 
@@ -36,9 +48,9 @@ Page {
         if (data !== "error") {
             var parsed = JSON.parse(data)
             if (parsed.status === "ok") {
-               for (var i in parsed.sources) {
-                   sources.append(parsed.sources[i])
-               }
+                for (var i in parsed.sources) {
+                    sources.append(parsed.sources[i])
+                }
             }
             busyIndicator.running = false
             busyIndicator.visible = false
@@ -47,47 +59,49 @@ Page {
 
     function getSources(/*lang, country, category*/) {
 
-        database.initDatabase()
-        sources.clear()
-        var options
-        var lang = database.getName("language")
-        if (!lang) {
-            lang = "All"
-        }
-        var country = database.getName("country")
-        if (!country) {
-            country = "All"
-        }
-        var category = database.getName("category")
-        if (!category) {
-            category = "All"
-        }
-        if (lang && lang !== "All") {
-            options = "language=" + lang
-        }
-        if (country && country !== "All") {
-            if (options) {
-               options += "&country=" + country
-            } else {
-                options = "country=" + country
+        apiKey = database.getValue("apiKey")
+        if (apiKey)  {
+            showHint = false
+            sources.clear()
+            var options
+            var lang = database.getName("language")
+            if (!lang) {
+                lang = "All"
             }
-        }
-        if (category && category !== "All") {
-            if (options) {
-               options += "&category=" + category
-            } else {
-                options = "category=" + category
+            var country = database.getName("country")
+            if (!country) {
+                country = "All"
             }
-        }
+            var category = database.getName("category")
+            if (!category) {
+                category = "All"
+            }
+            if (lang && lang !== "All") {
+                options = "language=" + lang
+            }
+            if (country && country !== "All") {
+                if (options) {
+                    options += "&country=" + country
+                } else {
+                    options = "country=" + country
+                }
+            }
+            if (category && category !== "All") {
+                if (options) {
+                    options += "&category=" + category
+                } else {
+                    options = "category=" + category
+                }
+            }
 
-        var url
-        var apiKey = database.getValue("apiKey")
-        if (options) {
-            url = "https://newsapi.org/v2/sources?apikey=" + apiKey + "&" + options
-        } else {
-            url = "https://newsapi.org/v2/sources?apikey=" + apiKey
+            var url
+            if (options) {
+                url = "https://newsapi.org/v2/sources?apikey=" + apiKey + "&" + options
+            } else {
+                url = "https://newsapi.org/v2/sources?apikey=" + apiKey
+            }
+            Utils.sendHttpRequest("GET", url, fillData)
         }
-        Utils.sendHttpRequest("GET", url, fillData)
     }
 
     function searchPage(value) {
@@ -189,5 +203,18 @@ Page {
             text: qsTr("Nothing to show now")
         }
     }
+
+              HintLoader {
+                  hint: apiKeyHint
+                  when: showHint
+
+              }
+              Hint {
+                  id: apiKeyHint
+                  title: qsTr("apiKey")
+                  items: [qsTr("- Select settings to enter an apiKey for newsapi.org")]
+              }
+
+
 }
 
