@@ -47,7 +47,7 @@ Categories:
 DeveloperName: Mark Washeim (poetaster)
 Custom:
  - Repo: https://github.com/poetaster/allthenews
-Icon: https://raw.githubusercontent.com/poetaster/allthenews/main/allthenews-icon.png
+Icon: https://raw.githubusercontent.com/poetaster/allthenews/main/icons/172x172/harbour-allthenews.png
 Screenshots:
  - https://raw.githubusercontent.com/poetaster/allthenews/master/Screenshot_1.png
  - https://raw.githubusercontent.com/poetaster/allthenews/master/Screenshot_2.png
