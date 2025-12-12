@@ -33,6 +33,22 @@
     </message>
 </context>
 <context>
+    <name>ExternalLinkDialog</name>
+    <message>
+        <location filename="../qml/pages/ExternalLinkDialog.qml" line="11"/>
+        <source>Open in browser</source>
+        <translation type="unfinished">Im Webbrowser öffnen</translation>
+    </message>
+</context>
+<context>
+    <name>NewsWebPage</name>
+    <message>
+        <location filename="../qml/pages/NewsWebPage.qml" line="19"/>
+        <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SearchPage</name>
     <message>
         <location filename="../qml/pages/SearchPage.qml" line="55"/>

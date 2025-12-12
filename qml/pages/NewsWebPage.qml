@@ -4,7 +4,7 @@ import Sailfish.WebView 1.0
 import Sailfish.WebEngine 1.0
 import QtMultimedia 5.0
 
-Page {
+WebViewPage {
     id: root
     objectName: "WebPage"
 
@@ -12,31 +12,30 @@ Page {
 
     allowedOrientations: Orientation.All
 
-    Loader {
-        id: loader
-
+    SilicaFlickable {
         anchors.fill: parent
-        sourceComponent: parent.status === PageStatus.Active ? webComponent : undefined
-    }
-
-    Component {
-        id: webComponent
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Open in browser")
+                onClicked: {
+                    Qt.openUrlExternally(url);
+                }
+            }
+        }
 
         WebView {
             anchors.fill: parent
+            width: parent.width
+
+            url: root.url
 
             id: webview
-            httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0 Firefox/78.0"
+            httpUserAgent: "Mozilla/5.0 (Mobile; rv:93.0) Gecko/93.0 Firefox/93.0"
 
             /* This will probably be required from 4.4 on. */
             Component.onCompleted: {
-                WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
-                WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
-                    if (configFontScaleWebEnabled.booleanValue)
-                    {
-                        experimental.preferences.minimumFontSize =
-                                Theme.fontSizeExtraSmall * (configFontScale.value / 100.0);
-                    }
+                //WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
+                //WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
 
             }
             onRecvAsyncMessage: {
@@ -54,13 +53,6 @@ Page {
 
             }
 
-            //property int _backCount: 0
-            //property int _previousContentY;
-
-            url: root.url
-
-            onLoadingChanged: {}
         }
-
     }
 }
