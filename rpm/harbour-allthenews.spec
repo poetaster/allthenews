@@ -16,7 +16,7 @@ Name:       harbour-allthenews
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    All the news. News from newapi.org.
-Version:    0.5
+Version:    0.5.0
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
