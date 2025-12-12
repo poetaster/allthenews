@@ -10,7 +10,7 @@ Page {
     property string sourceTitle
     property string search
     property string url
-    property bool debug: false
+    property bool debug: true
 
     Database {
         id: database
@@ -143,7 +143,7 @@ Page {
                 }
             }
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("NewsWebPage.qml"), {url: url})
+                pageStack.push(Qt.resolvedUrl("NewsWebPage.qml"), {"url": url})
             }
         }
     }
@@ -174,8 +174,8 @@ Page {
         id: feedListView
         anchors.fill: parent
         header: PageHeader { id: viewHeader; title: sourceTitle }
-        focus: true
-        clip: true
+        //focus: true
+        //clip: true
         spacing: Theme.paddingSmall
         model: feed
         delegate: feedDelegate

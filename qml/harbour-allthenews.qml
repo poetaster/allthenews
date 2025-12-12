@@ -30,8 +30,9 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtMultimedia 5.0
 import "pages"
-
+import "cover"
 ApplicationWindow
 {
     id: app
@@ -39,9 +40,10 @@ ApplicationWindow
     property string feedIcon
 
     initialPage: Component { SourcesPage { } }
+    allowedOrientations: Orientation.All
 
-    allowedOrientations: Orientation.Portrait
-    _defaultPageOrientations: Orientation.Portrait
+    //allowedOrientations: Orientation.Portrait
+    //_defaultPageOrientations: Orientation.Portrait
 
     cover: Component {
         CoverBackground {

@@ -29,11 +29,15 @@ DISTFILES += \
     rpm/allthenews.spec \
     translations/*.ts \
 
-#SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
+
+
+PKGCONFIG += qt5embedwidget
+#CONFIG += link_pkgconfig
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the

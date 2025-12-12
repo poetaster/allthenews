@@ -17,4 +17,4 @@ OrganizationName=de.poetaster
 # ApplicationName does not have to be identical to Name
 ApplicationName=allthenews
 # Add the required permissions here
-Permissions=Internet;UserDirs
+Permissions=Internet;UserDirs;WebView;Audio

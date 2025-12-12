@@ -8,21 +8,30 @@ Name:       harbour-allthenews
 # >> macros
 # << macros
 
+%define _binary_payload w2.xzdio
+%define _binary_payload w2.xzdio
+%{!?qtc_qmake:%define qtc_qmake %qmake}
+%{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
+%{!?qtc_make:%define qtc_make make}
+%{?qtc_builddir:%define _builddir %qtc_builddir}
+
 Summary:    All the news. News from newapi.org.
-Version:    0.4
+Version:    0.5
 Release:    1
 Group:      Qt/Qt
 License:    GPLv3
 BuildArch:  noarch
 URL:        https://github.com/poetaster/allthenews
 Source0:    %{name}-%{version}.tar.bz2
-Source31:   harbour-allthenews.svg
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   libsailfishapp-launcher
+
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.3
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(qt5embedwidget)
+
 BuildRequires:  desktop-file-utils
 BuildRequires:  qt5-qttools-linguist
 BuildRequires: librsvg-tools
@@ -57,28 +66,15 @@ Url:
 # >> build pre
 # << build pre
 
-%qmake5 
+%qtc_qmake5
 
-make %{?_smp_mflags}
-
+%qtc_make %{?_smp_mflags}
 
 # >> build post
 # << build post
 
 %install
 rm -rf %{buildroot}
-
-%make_install
-install -D -m0644 %{SOURCE31}  %{_tmppath}/
-
-for size in 86 108 128 172
-do
-   mkdir -p %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/
-   rsvg-convert --width=$size --height=$size --output \
-           %{buildroot}%{_datadir}/icons/hicolor/${size}x${size}/apps/%{name}.png \
-          %{_tmppath}/harbour-allthenews.svg
-done
-
 # >> install pre
 # << install pre
 %qmake5_install

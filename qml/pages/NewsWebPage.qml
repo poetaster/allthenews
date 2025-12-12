@@ -1,40 +1,66 @@
-import QtQuick 2.2
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import Sailfish.WebView 1.0
+import Sailfish.WebEngine 1.0
+import QtMultimedia 5.0
 
 Page {
+    id: root
+    objectName: "WebPage"
 
-    property alias url: webView.url
+    property string url
 
-    BusyIndicator {
-        id: busyIndicator
-        size: BusyIndicatorSize.Large
-        anchors.centerIn: parent
-        running: webView.loading
-        visible: webView.loading
+    allowedOrientations: Orientation.All
+
+    Loader {
+        id: loader
+
+        anchors.fill: parent
+        sourceComponent: parent.status === PageStatus.Active ? webComponent : undefined
     }
 
-    WebView {
-        id: webView
-        width: parent.width
-        height: parent.height
+    Component {
+        id: webComponent
 
-        url: "http://sailfishos.org"
-        // keeping these here from web examples for future ref:
-        /*onViewInitialized: {
-            webview.loadFrameScript(Qt.resolvedUrl("framescript.js"));
-            webview.addMessageListener("webview:action")
-        }*/
+        WebView {
+            anchors.fill: parent
 
-        /*onRecvAsyncMessage: {
-            switch (message) {
-            case "webview:action":
-                label.text = {"four": "4", "five": "5", "six": "6"}[data.topic]
-                console.debug(data.topic)
-                break
+            id: webview
+            httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0 Firefox/78.0"
+
+            /* This will probably be required from 4.4 on. */
+            Component.onCompleted: {
+                WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
+                WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
+                    if (configFontScaleWebEnabled.booleanValue)
+                    {
+                        experimental.preferences.minimumFontSize =
+                                Theme.fontSizeExtraSmall * (configFontScale.value / 100.0);
+                    }
+
             }
-        }*/
+            onRecvAsyncMessage: {
+
+                console.debug(message)
+                switch (message) {
+                case "embed:contentOrientationChanged":
+                    break
+                case "webview:action":
+                    if ( data.key != val ) {
+                        //if (debug) console.debug(data.src)
+                    }
+                    break
+                }
+
+            }
+
+            //property int _backCount: 0
+            //property int _previousContentY;
+
+            url: root.url
+
+            onLoadingChanged: {}
+        }
+
     }
-
 }
-
